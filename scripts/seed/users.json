@@ -1,0 +1,40 @@
+[
+    {
+        "userId": "user1",
+        "firstName": "User",
+        "lastName": "One",
+        "fullName": "User One",
+        "userName": "user1",
+        "dob": "2000-01-01",
+        "primaryEmailAddress": "user@example.com",
+        "emailAddresses": ["user@example.com"],
+        "primaryPhoneNumber": "12345678",
+        "phoneNumbers": ["12345678"],
+        "imageSrc": "user1.jpg",
+        "externalAccountProvider": "local",
+        "externalAccountId": "user1",
+        "publicMetadata": {},
+        "lastSignInAt": "2021-01-01T00:00:00.000Z",
+        "createdAt": "2021-01-01T00:00:00.000Z",
+        "updatedAt": "2021-01-01T00:00:00.000Z"
+    },
+    {
+        "userId": "user_2kiKrarPd08pt9sypguSC0MTBUD",
+        "firstName": "User",
+        "lastName": "One",
+        "fullName": "Hamza EL KAROUI",
+        "userName": "user1",
+        "dob": "2000-01-01",
+        "primaryEmailAddress": "user@example.com",
+        "emailAddresses": ["user@example.com"],
+        "primaryPhoneNumber": "12345678",
+        "phoneNumbers": ["12345678"],
+        "imageSrc": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ya2lLclozSld3MFRmT1JPRUpmMmxmM1hOYmcifQ",
+        "externalAccountProvider": "local",
+        "externalAccountId": "user1",
+        "publicMetadata": {},
+        "lastSignInAt": "2021-01-01T00:00:00.000Z",
+        "createdAt": "2021-01-01T00:00:00.000Z",
+        "updatedAt": "2021-01-01T00:00:00.000Z"
+    }
+]

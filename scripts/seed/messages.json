@@ -1,0 +1,38 @@
+[
+    {
+        "messageId": 1,
+        "replyId": 1,
+        "senderId": "user_2kiKrarPd08pt9sypguSC0MTBUD",
+        "receiverId": "user1",
+        "content": "Hello, how are you?",
+        "isRead": true,
+        "createdAt": "2021-01-01T00:00:00.000Z"
+    },
+    {
+        "messageId": 2,
+        "replyId": 1,
+        "senderId": "user1",
+        "receiverId": "user_2kiKrarPd08pt9sypguSC0MTBUD",
+        "content": "I'm fine, thank you.",
+        "isRead": true,
+        "createdAt": "2021-01-01T00:00:00.000Z"
+    },
+    {
+        "messageId": 3,
+        "replyId": 2,
+        "senderId": "user_2kiKrarPd08pt9sypguSC0MTBUD",
+        "receiverId": "user1",
+        "content": "Yo bro, tbi3 ?",
+        "isRead": true,
+        "createdAt": "2021-01-01T00:00:00.000Z"
+    },
+    {
+        "messageId": 4,
+        "replyId": 2,
+        "senderId": "user1",
+        "receiverId": "user_2kiKrarPd08pt9sypguSC0MTBUD",
+        "content": "Oui 10 alf",
+        "isRead": true,
+        "createdAt": "2021-01-01T00:00:00.000Z"
+    }
+]

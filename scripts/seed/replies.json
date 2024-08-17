@@ -1,0 +1,17 @@
+[
+    {
+        "replyId": 1,
+        "adId": 1,
+        "userId": "user_2kiKrarPd08pt9sypguSC0MTBUD",
+        "adOwnerId": "user1",
+        "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+        "replyId": 2,
+        "adId": 2,
+        "userId": "user_2kiKrarPd08pt9sypguSC0MTBUD",
+        "adOwnerId": "user1",
+        "createdAt": "2023-01-01T00:00:00.000Z"
+    }
+
+]
