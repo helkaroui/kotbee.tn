@@ -23,7 +23,7 @@ export default function RootLayout({
     <>
       <NavbarStepper />
       <Toaster />
-      <main className="flex min-h-screen flex-col pt-[80px]">
+      <main className="flex flex-col pt-[80px]">
         {children}
       </main>
     </>

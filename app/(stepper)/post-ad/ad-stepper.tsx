@@ -77,7 +77,7 @@ export default function StepperForm() {
 	};
 
 	return (
-		<div className="flex w-full flex-col gap-4 m-2">
+		<div className="flex w-full flex-col m-2">
 			<Stepper variant="circle-alt" initialStep={0} steps={steps}>
 				{steps.map((stepProps, index) => {
 					if (index === 0) {
@@ -439,7 +439,7 @@ function ThirdStepForm({data, setFormData}: StepType) {
     return (
 		<Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-				<div className="flex max-w-[450px] md:w-full min-h-[200px] bg-slate-200 rounded-xl p-4 justify-center items-center">
+				<div className="flex w-full bg-slate-200 rounded-xl p-4 justify-center items-center">
 					<MultiImageUploader onChange={(images) => {
 						setFormData({...data, images});
 					}} />
@@ -460,7 +460,7 @@ function StepperFormActions() {
 	} = useStepper();
 
 	return (
-		<div className="w-full flex justify-end gap-2">
+		<div className="w-full flex justify-center gap-2">
 			{hasCompletedAllSteps ? (
 				<Button size="sm" type="button" onClick={resetSteps}>
 					إعادة التعيين
