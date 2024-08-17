@@ -31,8 +31,8 @@ export default async function Page({ params }: Props) {
   }
 
   return (
-    <div className="flex flex-col gap-y-4 mt-8 mb-4 w-[700px] mx-auto justify-start items-start">
-      <div className="w-full">
+    <div className="flex flex-col mt-8 mb-4 px-4 lg:w-[700px] mx-auto justify-start items-start">
+      <div className="w-full mb-4">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -58,9 +58,9 @@ export default async function Page({ params }: Props) {
         </Breadcrumb>
       </div>
 
-      <div className="w-full flex flex-row gap-x-2">
-        <div className="basis-1/3 w-full h-full">
-          <div className="flex flex-col justify-center items-center gap-4 rounded-xl border border-b-4 border-slate-300 w-full min-h-20 p-2">
+      <div className="w-full flex flex-row">
+        <div className="hidden md:basis-1/3 w-full">
+          <div className="flex flex-col justify-center items-center gap-4 rounded-xl border border-b-4 border-slate-300 w-full p-2">
 
             <div className="flex flex-row gap-2 justify-center items-center">
               <Link href={`/profil/${ads.userId}`}>
@@ -82,7 +82,7 @@ export default async function Page({ params }: Props) {
           </div>
         
         </div>
-        <div className="basis-2/3 h-full">
+        <div className="flex flex-col md:basis-2/3 w-full px-2">
           <ImageCarousel images={ads.images} />
           <div className="flex flex-row justify-between mt-2">
               <h2 className="font-bold text-xl">{ads.title}</h2>
@@ -105,12 +105,6 @@ export default async function Page({ params }: Props) {
           </p>
         </div>
 
-{/*         <Separator />
-
-        <div className="w-full flex justify-center items-center mt-2">
-          <Button size="sm" variant="dangerOutline" className="text-sm">الإبلاغ عن الإعلان</Button>
-        </div> */}
-        
         </div>
       </div>
     </div>

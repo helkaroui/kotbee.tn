@@ -16,7 +16,7 @@ type Props = {
 
 export const ImageCarousel = ({images}: Props) => {
     return (
-      <Carousel dir="rtl">
+      <Carousel dir="rtl" className="w-full">
         <CarouselPrevious />
         <CarouselNext />
         <div className="relative ">
