@@ -33,12 +33,18 @@ export async function POST(request: Request) {
     }
 
     try {
+        const catId = data.get("categoryId")?.toString();
+        const subCatId = data.get("subcategoryId")?.toString();
+        if (!catId || !subCatId) {
+            return new NextResponse(null, {status: 400});
+        }
+
         const res = await db.insert(ads).values({
             userId: user.userId,
             title: data.get("title")?.toString() || "",
             description: data.get("description")?.toString() || "",
-            category: Number(data.get("categoryId")?.toString()) || 0,
-            subCategory: Number(data.get("subCategoryId")?.toString()) || 0,
+            category: parseInt(catId),
+            subCategory: parseInt(subCatId),
             gouvernorat: data.get("gouvernorat")?.toString() || "",
             delegation: data.get("delegation")?.toString() || "",
             localite: data.get("localite")?.toString() || "",

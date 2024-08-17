@@ -4,9 +4,9 @@ import Image from 'next/image';
 export default function Footer() {
     return (
         <footer
-            className="w-full bg-[#183153] py-4 md:py-12 flex flex-row mx-auto justify-start text-white"
+            className="w-full bg-[#183153] py-4 md:py-12 flex flex-row justify-start text-white"
         >
-            <div className="flex flex-col lg:min-w-[1152px] mx-auto justify-center">
+            <div className="flex flex-col lg:min-w-[1152px] lg:mx-auto justify-center">
                     <div className="flex flex-col md:flex-row mb-4 mx-4 md:mx-0">
                        <div className="basis-1/2 md:ml-4">
                          <Image src="/logo.svg" alt="kotbi.tn" height={50} width={50} />

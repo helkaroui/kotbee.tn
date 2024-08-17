@@ -15,7 +15,6 @@ import { getReplyById } from "@/db/queries";
 import { redirect } from "next/navigation";
 import moment from "moment";
 
-
 type Props = {
   params: {
     id: number;

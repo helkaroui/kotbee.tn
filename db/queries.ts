@@ -1,4 +1,4 @@
-import { ne, like, or, eq } from "drizzle-orm";
+import { ne, like, or, eq, and, sql } from "drizzle-orm";
 import db from "./drizzle";
 import { ads, messages, replies, users } from "./schema";
 import { auth } from "@clerk/nextjs/server";
@@ -13,15 +13,38 @@ export const getRecentAds = async () => {
     });
 };
 
-export const searchAds = async (query: string) => {
+export const searchAds = async (
+    category: number | null,
+    subcategory: number | null,
+    gouvernorat: string | null,
+    delegation: string | null,
+    localite: string | null,
+    q: string | null,
+    page: number
+    ) => {
+    const query = q?.toLowerCase() || '';
     return db.query.ads.findMany({
-        where: or(like(ads.title, `%${query}%`), like(ads.description, `%${query}%`)),
+        where: and(
+            ne(ads.isDeleted, true),
+            category ? eq(ads.category, category) : undefined,
+            subcategory ? eq(ads.subCategory, subcategory) : undefined,
+            gouvernorat ? like(ads.gouvernorat, `%${gouvernorat}%`) : undefined,
+            delegation ? like(ads.delegation, `%${delegation}%`) : undefined,
+            localite ? like(ads.localite, `%${localite}%`) : undefined,
+            q ? or(
+                sql`LOWER(${ads.title}) LIKE ${`%${query}%`}`,
+                sql`LOWER(${ads.description}) LIKE ${`%${query}%`}`
+            ) : undefined
+        ),
         with: {
             user: true
         },
-        limit: 20
+        limit: 20,
+        offset: (page - 1) * 20,
     });
 };
+
+export type searchAdsType = Awaited<ReturnType<typeof searchAds>>;
 
 export const getAdById = async (adId: number) => {
     return db.query.ads.findFirst({
@@ -120,6 +143,12 @@ export const getCategories = async () => {
         with: {
             subCategories: true
         }
+    });
+};
+
+export const getSubCategories = async () => {
+    return db.query.subCategories.findMany({
+        orderBy: (subcategories, {asc}) => [asc(subcategories.title)]
     });
 };
 

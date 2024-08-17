@@ -3,7 +3,7 @@ import * as NextMdx from '@next/mdx'
 import remarkGfm from 'remark-gfm'
 
 const nextConfig = {
-    output: 'standalone',
+    output: 'standalone', //'export',
     // Configure `pageExtensions` to include MDX files
     pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
     // Optionally, add any other Next.js config below

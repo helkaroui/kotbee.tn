@@ -27,7 +27,7 @@ export default async function Page() {
   }
 
   return (
-    <div className="flex flex-col gap-y-4 mt-8 mb-4 mx-4 w-full justify-start items-start">
+    <div className="flex flex-col mt-8 mb-4 mx-4 w-full justify-start items-start">
       <div className="w-full">
         <Breadcrumb>
           <BreadcrumbList>
@@ -109,7 +109,7 @@ const PostCard = ({ id, title, description, location, date, image }: Props) => {
   return (
       <div className={cn("relative flex flex-row w-full gap-x-4 p-4 border border-b-4 border-gray-200 rounded-lg hover:cursor-pointer hover:bg-gray-50 bg-white")}>
         <Link href={`/ad/${id}`} className="w-full flex flex-row gap-2">
-          <div className="w-[100px] bg-white rounded-lg">
+          <div className=" bg-white rounded-lg">
             <Image src={image || "/images/placeholder.png"} alt="kotbee.tn" className="rounded-lg" height={100} width={100} />
           </div>
           <div className="flex flex-col text-md">

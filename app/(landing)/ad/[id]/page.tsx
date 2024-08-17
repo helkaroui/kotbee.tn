@@ -40,19 +40,19 @@ export default async function Page({ params }: Props) {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/categories/livres">{ads.cat?.title}</BreadcrumbLink>
+              <BreadcrumbLink href={`/search?category=${ads.category}`}>{ads.cat?.title}</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/categories/livres">{ads.subCat?.title}</BreadcrumbLink>
+              <BreadcrumbLink href={`/search?subcategory=${ads.subCategory}`}>{ads.subCat?.title}</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/location/Nabeul">{ads.gouvernorat}</BreadcrumbLink>
+              <BreadcrumbLink href={`/search?gouvernorat=${ads.gouvernorat}`}>{ads.gouvernorat}</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>{ads.delegation}</BreadcrumbPage>
+              <BreadcrumbLink href={`/search?delegation=${ads.delegation}`}>{ads.delegation}</BreadcrumbLink>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
