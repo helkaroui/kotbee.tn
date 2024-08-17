@@ -1,11 +1,3 @@
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
-
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Link from "next/link";
@@ -25,7 +17,7 @@ export default async function Listings() {
                     </div>
                     <div className="w-full flex overflow-x-auto scroll-smooth scroll-mx-4 snap-x">
                         {recentAds.map((ads, index) => (
-                            <div className="p-1">
+                            <div key={index} className="p-1">
                                 {/* TODO add placeholder */}
                                 <div
                                     className="relative w-[200px] h-[200px] bg-cover bg-center rounded-lg snap-center "
