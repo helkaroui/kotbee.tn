@@ -26,15 +26,14 @@ export default async function Listings() {
 
                 <Carousel
                     opts={{
-                        align: "end",
                         direction: "rtl",
                     }}
-                    className="w-full"
+                    className="lg:overflow-hidden"
                 >
                     <CarouselContent>
                         {recentAds.map((ads, index) => (
-                            <CarouselItem key={index} className="basis-1/3">
-                                <div className="p-1 min-w-[200px]">
+                            <CarouselItem key={index} className="basis-1/2">
+                                <div className="p-1">
                                     {/* TODO add placeholder */}
                                     <Card 
                                         className="relative"

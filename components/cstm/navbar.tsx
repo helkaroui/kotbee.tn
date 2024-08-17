@@ -12,17 +12,17 @@ export default function NavbarBtn({ href, label, icon }: BtnProps) {
     return (
         <ClerkLoaded>
             <SignedIn>
-                <Link href={href} className="flex flex-col justify-center items-center min-w-[70px] p-2 hover:bg-slate-50 hover:rounded-lg hover:shadow-inner">
+                <Link href={href} className="flex flex-col justify-center items-center min-w-[50px] p-2 hover:bg-slate-50 hover:rounded-lg hover:shadow-inner">
                     {icon}
-                    <p>{label}</p>
+                    <p className="md:text-xs lg:text-md">{label}</p>
                 </Link>
             </SignedIn>
 
             <SignedOut>
                 <SignInButton mode="modal" forceRedirectUrl={href} signUpForceRedirectUrl={href}>
-                    <div className="flex flex-col hover:cursor-pointer justify-center items-center min-w-[70px] p-2 hover:bg-slate-50 hover:rounded-lg hover:shadow-inner">
+                    <div className="flex flex-col hover:cursor-pointer justify-center items-center min-w-[50px] p-2 hover:bg-slate-50 hover:rounded-lg hover:shadow-inner">
                         {icon}
-                        <p>{label}</p>
+                        <p className="md:text-xs lg:text-md">{label}</p>
                     </div>
                 </SignInButton>
             </SignedOut>
@@ -33,7 +33,7 @@ export default function NavbarBtn({ href, label, icon }: BtnProps) {
 export function Navbar() {
     return (
         <nav className="fixed top-0 left-0 z-50 w-full flex flex-row justify-between items-center py-2 bg-[#ffd43b] border-b-[1px] border-black shadow-xl">
-            <div className="w-[900px] flex flex-row justify-around items-center mx-auto">
+            <div className="w-[500px] lg:w-[900px] flex flex-row justify-between items-center mx-auto">
 
                 <Link href="/" className="flex flex-row justify-center items-center gap-2 text-xl font-bold">
                     <Image src="/logo.svg" height={35} width={35} alt="kotbi.tn"></Image>
@@ -41,9 +41,9 @@ export function Navbar() {
                 </Link>
 
                 <div className="flex gap-x-4">
-                    <NavbarBtn href="/favories" label="الإعلانات المفضلة" icon={<Heart />} />
+                    <NavbarBtn href="/favories" label=" المفضلة" icon={<Heart />} />
                     <NavbarBtn href="/messages" label="الرسائل" icon={<MessageSquare />} />
-                    <NavbarBtn href="/user" label="الملف الشخصي" icon={<User />} />
+                    <NavbarBtn href="/user" label="الملف" icon={<User />} />
                 </div>
             </div>
         </nav>

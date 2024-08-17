@@ -77,7 +77,7 @@ export default function StepperForm() {
 	};
 
 	return (
-		<div className="flex w-full flex-col gap-4">
+		<div className="flex w-full flex-col gap-4 m-2">
 			<Stepper variant="circle-alt" initialStep={0} steps={steps}>
 				{steps.map((stepProps, index) => {
 					if (index === 0) {
@@ -325,7 +325,7 @@ function SecondStepForm({data, setFormData}: StepType) {
 									field.onChange(v);
 								}} dir="rtl" disabled={form.control._formValues["gouvernorat"] === ""}>
 									<FormControl>
-									<SelectTrigger className="min-w-[150px]">
+									<SelectTrigger className="min-w-[100px]">
 										<SelectValue placeholder="" />
 									</SelectTrigger>
 									</FormControl>
@@ -350,7 +350,7 @@ function SecondStepForm({data, setFormData}: StepType) {
 								<FormLabel>المدينة</FormLabel>
 								<Select defaultValue={field.value} onValueChange={field.onChange} dir="rtl"  disabled={form.control._formValues["gouvernorat"] === "" || form.control._formValues["delegation"] === ""}>
 									<FormControl>
-									<SelectTrigger className="min-w-[150px]">
+									<SelectTrigger className="min-w-[100px]">
 										<SelectValue placeholder="" />
 									</SelectTrigger>
 									</FormControl>
@@ -377,7 +377,6 @@ function SecondStepForm({data, setFormData}: StepType) {
 							<FormControl>
 								<Textarea
 									placeholder="أخبرنا قليلاً عن نفسك"
-									className="resize-none"
 									{...field}
 									/>
 							</FormControl>
@@ -434,14 +433,13 @@ function ThirdStepForm({data, setFormData}: StepType) {
 	});
 
 	function onSubmit(_data: z.infer<typeof ThirdFormSchema>) {
-		//setFormData({...data, ..._data});
 		nextStep();
 	}
 
     return (
 		<Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-				<div className="flex w-full min-h-[200px] bg-slate-200 rounded-xl p-4 justify-center items-center">
+				<div className="flex max-w-[450px] md:w-full min-h-[200px] bg-slate-200 rounded-xl p-4 justify-center items-center">
 					<MultiImageUploader onChange={(images) => {
 						setFormData({...data, images});
 					}} />

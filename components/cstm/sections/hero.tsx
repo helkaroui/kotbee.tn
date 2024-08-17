@@ -14,7 +14,7 @@ export default function Hero() {
             className="w-full bg-slate-100"
         >
         <div 
-            className="max-w-[988px] mx-auto flex-1 w-full flex flex-col lg:flex-col items-center justify-center p-4 gap-2"
+            className="lg:max-w-[988px] mx-auto flex-1 w-full flex flex-col lg:flex-col items-center justify-center p-4 gap-2"
             
             >
 
@@ -35,19 +35,14 @@ export default function Hero() {
                         </Link>
                     </Button>
 
-                    <div className="w-full flex flex-row justify-center items-center gap-x-2">
                         <Separator className="bg-slate-400" />
                         <p className="text-lg lg:text-xl text-neutral-500 max-w-[600px] text-center">
                             أو
                         </p>
-                        <Separator className="bg-slate-400" />
-                    </div>
-
-                    
 
                     <div className="flex flex-row gap-x-2 justify-center items-center">
-                        <Input className="grow w-[400px]" type="text" placeholder="ابحث عن لوازم المدرسة"  />
-                        <Button size="lg" variant="whiteComic" className="w-[100px]" asChild>
+                        <Input className="lg:grow lg:w-[400px]" type="text" placeholder="ابحث عن لوازم المدرسة"  />
+                        <Button size="lg" variant="whiteComic" className="lg:w-[100px]" asChild>
                             <Link href="/search">
                             ابحث
                             </Link>
