@@ -34,7 +34,7 @@ export default async function Page() {
             isDeleted={false}
             title={ad.ad.title!}
             description={ad.ad.description!}
-            location={ad.ad.gouvernorat + ", " + ad.ad.district}
+            location={ad.ad.gouvernorat + ", " + ad.ad.delegation + ", " + ad.ad.localite}
             date={ad.ad.createdAt}
             image={ad.ad.images?.at(0) || null}
           />

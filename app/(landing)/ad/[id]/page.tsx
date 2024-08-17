@@ -101,7 +101,7 @@ export default async function Page({ params }: Props) {
         <div className="my-4">
           <p className="text-xl font-bold mb-2">الموقع:</p>
           <p className="text-md font-light">
-            {ads.gouvernorat}، {ads.district}
+            {ads.gouvernorat}، {ads.delegation}، {ads.localite}
           </p>
         </div>
 

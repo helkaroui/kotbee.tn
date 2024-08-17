@@ -79,7 +79,7 @@ export default async function Page() {
                       id={item.adId}
                       title={item.title!}
                       description={item.description!}
-                      location={item.gouvernorat + ", " + item.district}
+                      location={item.gouvernorat + ", " + item.delegation + ", " + item.localite}
                       date={item.createdAt}
                       image={item.images?.at(0) || null}
                     />

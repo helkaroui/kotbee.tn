@@ -138,7 +138,7 @@ const Carousel = forwardRef<
             break;
         }
       },
-      [emblaMainApi, orientation, direction]
+      [emblaMainApi, orientation, direction, ScrollNext, ScrollPrev]
     );
 
     const onThumbClick = useCallback(
@@ -352,10 +352,12 @@ const CarouselPrevious = forwardRef<
 
   const scroll = direction === "rtl" ? scrollNext : scrollPrev;
   const canScroll = direction === "rtl" ? canScrollNext : canScrollPrev;
+
+  //TODO variant is not working
   return (
     <Button
       ref={ref}
-      variant={variant}
+      variant={"primaryOutline"}
       size={size}
       className={cn(
         "absolute h-6 w-6 rounded-full z-10",
@@ -389,10 +391,12 @@ const CarouselNext = forwardRef<
   } = useCarousel();
   const scroll = direction === "rtl" ? scrollPrev : scrollNext;
   const canScroll = direction === "rtl" ? canScrollPrev : canScrollNext;
+
+  // TODO variant is not working
   return (
     <Button
       ref={ref}
-      variant={variant}
+      variant={"primaryOutline"}
       size={size}
       className={cn(
         "absolute h-6 w-6 rounded-full z-10",

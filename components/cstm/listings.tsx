@@ -54,7 +54,7 @@ export default async function Listings() {
                                         
                                             <CardContent className="relative flex aspect-square items-center justify-center p-6 ">
                                                 <h2 className="absolute bottom-2 right-2 text-lg font-bold text-white">{ads.title}</h2>
-                                                <p  className="absolute top-2 right-2 text-sm font-semibold text-white">{ads.gouvernorat} - {ads.district}</p>
+                                                <p  className="absolute top-2 right-2 text-sm font-semibold text-white">{ads.gouvernorat} - {ads.delegation}</p>
                                             </CardContent>
                                         </Link>
                                     </Card>

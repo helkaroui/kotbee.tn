@@ -7,6 +7,11 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
     const data = await request.formData();
     const user = await auth();
+
+    if (!user || !user.userId) {
+        return new NextResponse(null, {status: 401});
+    }
+
     const images = data.getAll("images").map((image) => image as File);
 
     var uploadedImages = [];
@@ -30,14 +35,14 @@ export async function POST(request: Request) {
     try {
         const res = await db.insert(ads).values({
             userId: user.userId,
-            title: data.get("title"),
-            description: data.get("description"),
-            category: data.get("categoryId"),
-            subCategory: data.get("subCategoryId"),
-            gouvernorat: data.get("gouvernorat"),
-            delegation: data.get("delegation"),
-            localite: data.get("localite"),
-            showPhone: data.get("showPhone"),
+            title: data.get("title")?.toString() || "",
+            description: data.get("description")?.toString() || "",
+            category: Number(data.get("categoryId")?.toString()) || 0,
+            subCategory: Number(data.get("subCategoryId")?.toString()) || 0,
+            gouvernorat: data.get("gouvernorat")?.toString() || "",
+            delegation: data.get("delegation")?.toString() || "",
+            localite: data.get("localite")?.toString() || "",
+            showPhoneNumber: data.get("showPhone") === "true",
             images: uploadedImages,
         }).returning()
         return new NextResponse(JSON.stringify(res[0]), {status: 200});

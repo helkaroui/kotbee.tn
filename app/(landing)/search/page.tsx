@@ -39,8 +39,17 @@ export default function Page() {
   );
 }
 
+type PostCardProps = {
+  id: number;
+  title: string;
+  description: string;
+  location: string;
+  date: string;
+  image: string;
+  isNew: boolean;
+};
 
-const PostCard = ({ id, title, description, location, date, image, isNew }) => {
+const PostCard = ({ id, title, description, location, date, image, isNew }: PostCardProps) => {
   return (
     <Link href={`/ad/${id}`} className="w-full">
       <div className="relative flex flex-row w-full gap-x-4 p-4 border border-b-4 border-gray-200 rounded-lg hover:cursor-pointer hover:bg-gray-50">

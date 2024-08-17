@@ -24,7 +24,7 @@ export default function Hero() {
             </h1>
     
             <p className="text-lg lg:text-xl text-neutral-500 max-w-[600px] text-center">
-                // قم بتوليد بعض الوصف هنا
+                قم بتوليد بعض الوصف هنا
             </p>
     
     

@@ -33,7 +33,7 @@ export async function POST(request: Request) {
             externalAccountProvider: primary_email_address?.verification?.strategy,
             externalAccountId: primary_email_address?.linked_to.at(0)?.id,
             publicMetadata: payload.data.public_metadata,
-            lastSignInAt: payload.data.last_sign_in_at,
+            lastSignInAt: payload.data.last_sign_in_at ? new Date(payload.data.last_sign_in_at) : null,
             raw: payload.data,
             createdAt: new Date(payload.data.created_at),
             updatedAt: new Date(payload.data.updated_at)
@@ -61,10 +61,10 @@ export async function POST(request: Request) {
             externalAccountProvider: primary_email_address?.verification?.strategy,
             externalAccountId: primary_email_address?.linked_to.at(0)?.id,
             publicMetadata: payload.data.public_metadata,
-            lastSignInAt: payload.data.last_sign_in_at,
+            lastSignInAt: payload.data.last_sign_in_at ? new Date(payload.data.last_sign_in_at) : null,
             raw: payload.data,
-            createdAt: payload.data.created_at,
-            updatedAt: payload.data.updated_at
+            createdAt: new Date(payload.data.created_at),
+            updatedAt: new Date(payload.data.updated_at)
         }).where(
             eq(users.userId, payload.data.id)
         )
