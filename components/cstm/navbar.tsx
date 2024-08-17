@@ -5,16 +5,16 @@ import { ClerkLoaded, SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 
 import {
     Sheet,
-    SheetClose,
     SheetContent,
-    SheetDescription,
-    SheetFooter,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
   } from "@/components/ui/sheet"
 import { Separator } from "@/components/ui/separator";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import { SearchInput } from "./search-input";
+import { getCategories, getSubCategories } from "@/db/queries";
+import { Badge } from "@/components/ui/badge";
 
 type BtnProps = {
     href: string;
@@ -66,7 +66,10 @@ export function MobileNavBtn({ href, label, icon }: BtnProps) {
     );
 }
 
-export function MobileNavbar() {
+export async function MobileNavbar() {
+    const categories = await getCategories();
+    const subcategories = await getSubCategories();
+    
     return (
         <div className="flex md:hidden relative w-full mx-8 items-center justify-center">
             <Link href="/" className="flex flex-row justify-center items-center gap-2 text-xl font-bold">
@@ -91,19 +94,46 @@ export function MobileNavbar() {
                             </Link>
 
                         </SheetTitle>
-                        <Separator className="my-2"/>
                         </SheetHeader>
                             <div className="flex flex-col gap-4 p-4">
+
+                            <Separator className="my-2"/>
                                 
+                                <div className="flex flex-row my-2 justify-center items-center">
+                                    <SearchInput />
+                                </div>
+
+                                <div className="flex flex-row gap-x-2 justify-center items-center mb-12">
+                                    {
+                                        categories.map((category) => (
+                                            <Link key={category.id} href={`/search?category=${category.id}`}>
+                                                <Badge>{category.title}</Badge>
+                                            </Link>
+                                        ))
+                                    }
+
+                                    {
+                                        subcategories.map((category) => (
+                                            <Link key={category.id} href={`/search?subcategory=${category.id}`}>
+                                                <Badge>{category.title}</Badge>
+                                            </Link>
+                                        ))
+                                    }
+                                </div>
+                        
+
+                                <Separator className="my-2"/>
+
+                                    <MobileNavBtn href="/favories" label=" المفضلة" icon={<Heart />} />
+                                    <MobileNavBtn href="/messages" label="الرسائل" icon={<MessageSquare />} />
+                                    <MobileNavBtn href="/user" label="الملف" icon={<User />} />
+                                
+                                <Separator className="my-2 mb-8"/>
+
                                 <Link href="/post-ad" className="w-full">
                                     <Button variant="filledYellowComic" className="w-full">أضف منشورًا</Button>
                                 </Link>
 
-                                <Separator className="my-2"/>
-
-                                <MobileNavBtn href="/favories" label=" المفضلة" icon={<Heart />} />
-                                <MobileNavBtn href="/messages" label="الرسائل" icon={<MessageSquare />} />
-                                <MobileNavBtn href="/user" label="الملف" icon={<User />} />
                             </div>
                     </SheetContent>
                     </Sheet>

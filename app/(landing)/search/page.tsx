@@ -37,13 +37,12 @@ export default function Page() {
   return (
     <div className="flex flex-col mx-2 mt-8 mb-4 justify-start items-start">
       <div className="flex flex-row gap-x-4">
-        <Button variant="golden">الموقع <MapPin className="mr-2"/></Button>
-        <Button variant="golden">تصفية <Filter className="mr-2"/></Button>
+        <Button variant="golden" size="sm">الموقع <MapPin className="mr-2"/></Button>
+        <Button variant="golden" size="sm">تصفية <Filter className="mr-2"/></Button>
       </div>
 
       <div className="flex flex-col w-full my-4">
-        <p className="font-bold">الإعلانات: جميع أنحاء</p>
-        <p className="font-thin">76،845،112 إعلان</p>
+        <p className="font-thin">{ads.data.length} إعلانات</p>
       </div>
 
       <div className="flex flex-col w-full gap-4 justify-center items-center">

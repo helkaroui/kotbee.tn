@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator"
 import { getCategories, getSubCategories } from "@/db/queries";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
+import { SearchInput } from "@/components/cstm/search-input";
 
 export default async function Hero() {
     const categories = await getCategories();
@@ -40,7 +40,7 @@ export default async function Hero() {
                             أو ابحث عن ما تحتاجه
                         </p>
                         <div className="flex flex-row my-2 justify-center items-center">
-                            <Input placeholder="البحث" className="rounded-3xl min-w-[400px] border border-slate-500 text-center" />
+                            <SearchInput />
                         </div>
 
                         <div className="flex flex-row gap-x-2 justify-center items-center">

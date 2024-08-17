@@ -27,7 +27,7 @@ export default async function Page() {
   }
 
   return (
-    <div className="flex flex-col mt-8 mb-4 mx-4 w-full justify-start items-start">
+    <div className="flex flex-col mt-8 mb-4 px-4 w-full justify-start items-start">
       <div className="w-full">
         <Breadcrumb>
           <BreadcrumbList>
@@ -42,9 +42,9 @@ export default async function Page() {
         </Breadcrumb>
       </div>
 
-      <div className="w-full flex flex-col gap-x-2">
-          <div className="my-4">
-            <Card className="bg-slate-100">
+      <div className="w-full flex flex-col">
+          <div className="p-4">
+            <div className="bg-slate-100 rounded-xl">
               <CardHeader>
                 <CardTitle> الملف الشخصي</CardTitle>
                 
@@ -87,7 +87,7 @@ export default async function Page() {
                   }
                 </div>
               </CardContent>
-            </Card>
+            </div>
           </div>
         </div>
     </div>
