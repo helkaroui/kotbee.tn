@@ -1,21 +1,20 @@
 import db from "@/db/drizzle";
+import { ads } from "@/db/schema";
 import { NextResponse } from "next/server";
+import { eq } from "drizzle-orm";
 
 export async function GET(req: Request, {params}: {params: { id: number }}) {
     const data = await db.query.ads.findFirst({
         orderBy: (ads, {asc}) => [asc(ads.createdAt)],
-        where: {
-            adId: params.id
-        },
+        where: eq(ads.adId, params.id),
         with: {
             user: true
-        },
-        limit: 10
+        }
     });
 
-    if (!data || data.length === 0) {
+    if (!data) {
         return new NextResponse(null, { status: 404 });
     }
     
-    return new NextResponse(JSON.stringify(data[0]), {status: 200});
+    return new NextResponse(JSON.stringify(data), {status: 200});
 }
