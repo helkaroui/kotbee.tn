@@ -10,7 +10,7 @@
         "emailAddresses": ["user@example.com"],
         "primaryPhoneNumber": "12345678",
         "phoneNumbers": ["12345678"],
-        "imageSrc": "user1.jpg",
+        "imageSrc": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ya2lLclozSld3MFRmT1JPRUpmMmxmM1hOYmcifQ",
         "externalAccountProvider": "local",
         "externalAccountId": "user1",
         "publicMetadata": {},

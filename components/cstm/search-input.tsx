@@ -26,7 +26,7 @@ export const SearchInput = () => {
   
     return (
     <form onSubmit={handleSubmit} className="relative">
-        <Input placeholder="البحث" className="rounded-3xl min-w-[400px] border border-slate-500 text-center" value={state} onChange={handleChange} />
+        <Input placeholder="البحث" className="rounded-3xl w-full border border-slate-500 text-center" value={state} onChange={handleChange} />
         <div 
             className={cn(
                 "absolute top-1 left-1 w-8 h-8 bg-slate-200 rounded-full hover:cursor-pointer hover:bg-slate-300 flex justify-center items-center",

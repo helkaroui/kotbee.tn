@@ -1,13 +1,48 @@
 [
     {
         "id": 1,
-        "title": "Electronics",
+        "title": "كتب دراسية",
+        "description": "الكتب الدراسية لجميع المستويات من السنة الأولى إلى الباكالورية",
+        "subCategoryTitle": "المستوى الدراسي",
         "icon": "fas fa-mobile-alt",
         "createdAt": "2021-01-01T00:00:00.000Z"
     },
     {
         "id": 2,
-        "title": "Others",
+        "title": "أدوات مدرسية",
+        "description": "الأدوات الضرورية للدراسة مثل الأقلام والدفاتر والمحفضة",
+        "subCategoryTitle": "نوع الأدوات",
+        "icon": "fas fa-car",
+        "createdAt": "2021-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 3,
+        "title": "كتب مراجعة",
+        "description": "كتب مراجعة (Parascolaire)",
+        "subCategoryTitle": "المستوى الدراسي",
+        "icon": "fas fa-car",
+        "createdAt": "2021-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 4,
+        "title": "القصص و الروايات",
+        "description": "القصص و الروايات",
+        "subCategoryTitle": "المستوى الدراسي",
+        "icon": "fas fa-car",
+        "createdAt": "2021-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 5,
+        "title": "ملابس دراسة",
+        "description": "ملابس مثل الميدعة و الحذاء الدراسي",
+        "subCategoryTitle": "العمر",
+        "icon": "fas fa-car",
+        "createdAt": "2021-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 6,
+        "title": "فئة أخرى",
+        "description": "فئة أخرى غير المذكورة",
         "icon": "fas fa-car",
         "createdAt": "2021-01-01T00:00:00.000Z"
     }

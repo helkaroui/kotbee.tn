@@ -9,7 +9,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-  } from "@/components/ui/sheet"
+} from "@/components/ui/sheet"
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { SearchInput } from "./search-input";
@@ -47,29 +47,29 @@ export default function NavbarBtn({ href, label, icon }: BtnProps) {
 export function MobileNavBtn({ href, label, icon }: BtnProps) {
     return (
         <ClerkLoaded>
-        <SignedIn>
-            <Link href={href} className="flex gap-x-4 justify-center items-center min-w-[50px] p-1 hover:bg-rose-50 hover:rounded-lg hover:shadow-inner">
-                {icon}
-                <p className="text-lg">{label}</p>
-            </Link>
-        </SignedIn>
-
-        <SignedOut>
-            <SignInButton mode="modal" forceRedirectUrl={href} signUpForceRedirectUrl={href}>
+            <SignedIn>
                 <Link href={href} className="flex gap-x-4 justify-center items-center min-w-[50px] p-1 hover:bg-rose-50 hover:rounded-lg hover:shadow-inner">
                     {icon}
                     <p className="text-lg">{label}</p>
                 </Link>
-            </SignInButton>
-        </SignedOut>
-    </ClerkLoaded>
+            </SignedIn>
+
+            <SignedOut>
+                <SignInButton mode="modal" forceRedirectUrl={href} signUpForceRedirectUrl={href}>
+                    <Link href={href} className="flex gap-x-4 justify-center items-center min-w-[50px] p-1 hover:bg-rose-50 hover:rounded-lg hover:shadow-inner">
+                        {icon}
+                        <p className="text-lg">{label}</p>
+                    </Link>
+                </SignInButton>
+            </SignedOut>
+        </ClerkLoaded>
     );
 }
 
 export async function MobileNavbar() {
     const categories = await getCategories();
     const subcategories = await getSubCategories();
-    
+
     return (
         <div className="flex md:hidden relative w-full mx-8 items-center justify-center">
             <Link href="/" className="flex flex-row justify-center items-center gap-2 text-xl font-bold">
@@ -86,57 +86,49 @@ export async function MobileNavbar() {
                     </SheetTrigger>
                     <SheetContent>
                         <SheetHeader>
-                        <SheetTitle>
+                            <SheetTitle>
 
-                            <Link href="/" className="flex flex-row justify-center items-center gap-2 text-xl font-bold">
-                                <Image src="/logo.svg" height={35} width={35} alt="kotbi.tn"></Image>
-                                kotbee.tn
-                            </Link>
-
-                        </SheetTitle>
-                        </SheetHeader>
-                            <div className="flex flex-col gap-4 p-4">
-
-                            <Separator className="my-2"/>
-                                
-                                <div className="flex flex-row my-2 justify-center items-center">
-                                    <SearchInput />
-                                </div>
-
-                                <div className="flex flex-row gap-x-2 justify-center items-center mb-12">
-                                    {
-                                        categories.map((category) => (
-                                            <Link key={category.id} href={`/search?category=${category.id}`}>
-                                                <Badge>{category.title}</Badge>
-                                            </Link>
-                                        ))
-                                    }
-
-                                    {
-                                        subcategories.map((category) => (
-                                            <Link key={category.id} href={`/search?subcategory=${category.id}`}>
-                                                <Badge>{category.title}</Badge>
-                                            </Link>
-                                        ))
-                                    }
-                                </div>
-                        
-
-                                <Separator className="my-2"/>
-
-                                    <MobileNavBtn href="/favories" label=" المفضلة" icon={<Heart />} />
-                                    <MobileNavBtn href="/messages" label="الرسائل" icon={<MessageSquare />} />
-                                    <MobileNavBtn href="/user" label="الملف" icon={<User />} />
-                                
-                                <Separator className="my-2 mb-8"/>
-
-                                <Link href="/post-ad" className="w-full">
-                                    <Button variant="filledYellowComic" className="w-full">أضف منشورًا</Button>
+                                <Link href="/" className="flex flex-row justify-center items-center gap-2 text-xl font-bold">
+                                    <Image src="/logo.svg" height={35} width={35} alt="kotbi.tn"></Image>
+                                    kotbee.tn
                                 </Link>
 
+                            </SheetTitle>
+                        </SheetHeader>
+                        <div className="flex flex-col gap-4 p-4">
+
+                            <Separator className="my-2" />
+
+                            <div className="flex flex-row my-2 justify-center items-center">
+                                <SearchInput />
                             </div>
+
+                            <div className="flex flex-wrap gap-2 justify-center items-center">
+                                {
+                                    categories.map((category) => (
+                                        <Link key={category.id} href={`/search?category=${category.id}`}>
+                                            <Badge variant="tag">{category.title}</Badge>
+                                        </Link>
+                                    ))
+                                }
+                            </div>
+
+
+                            <Separator className="my-2" />
+
+                            <MobileNavBtn href="/favories" label=" المفضلة" icon={<Heart />} />
+                            <MobileNavBtn href="/messages" label="الرسائل" icon={<MessageSquare />} />
+                            <MobileNavBtn href="/user" label="الملف" icon={<User />} />
+
+                            <Separator className="my-2 mb-8" />
+
+                            <Link href="/post-ad" className="w-full">
+                                <Button variant="filledYellowComic" className="w-full">أضف منشورًا</Button>
+                            </Link>
+
+                        </div>
                     </SheetContent>
-                    </Sheet>
+                </Sheet>
             </div>
         </div>
     )

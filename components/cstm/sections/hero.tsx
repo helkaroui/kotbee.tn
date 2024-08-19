@@ -43,19 +43,11 @@ export default async function Hero() {
                             <SearchInput />
                         </div>
 
-                        <div className="flex flex-row gap-x-2 justify-center items-center">
+                        <div className="flex flex-wrap max-w-[500px] md:max-w-[600px]  gap-2 justify-center items-center">
                             {
                                 categories.map((category) => (
                                     <Link key={category.id} href={`/search?category=${category.id}`}>
-                                        <Badge>{category.title}</Badge>
-                                    </Link>
-                                ))
-                            }
-
-                            {
-                                subcategories.map((category) => (
-                                    <Link key={category.id} href={`/search?subcategory=${category.id}`}>
-                                        <Badge>{category.title}</Badge>
+                                        <Badge variant="tag">{category.title}</Badge>
                                     </Link>
                                 ))
                             }
