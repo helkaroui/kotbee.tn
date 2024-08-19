@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Step, Stepper, useStepper } from "@/components/extension/stepper";
@@ -24,13 +24,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import useSWR from 'swr';
-import { ImageUploader } from "@/components/extension/image-uploader";
 import { getCategoriesType } from "@/db/queries";
 import MultiImageUploader from "@/components/extension/multi-image-uploader";
 
 const steps = [
     { label: "عنوان الإعلان", description: "اختر عنوانًا لإعلانك" },
     { label: "وصف الإعلان", description: "اختر وصفًا" },
+    { label: "عنوان السكن", description: "حدد عنوانك" },
     { label: "إضافة صور", description: "إضافة صورة (اختياري)" },
 ];
 
@@ -94,7 +94,14 @@ export default function StepperForm() {
                             </Step>
                         )
                     }
-                    if (index === 2) {
+					if (index === 2) {
+						return (
+							<Step key={stepProps.label} {...stepProps}>
+								<GeolocationStepForm data={data} setFormData={setFormData} />
+							</Step>
+						)
+					}
+                    if (index === 3) {
                         return (
                             <Step key={stepProps.label} {...stepProps}>
                                 <ThirdStepForm data={data} setFormData={setFormData} />
@@ -141,7 +148,7 @@ function FirstStepForm({data, setFormData}: StepType) {
                     control={form.control}
                     name="title"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="mx-2">
                             <FormLabel>ما هو عنوان إعلانك؟</FormLabel>
                             <FormControl>
                                 <Input placeholder="اكتب عنوانًا مختصرًا هنا" {...field} dir="rtl" />
@@ -169,6 +176,10 @@ const SecondFormSchema = z.object({
 	subcategory: z.string().min(1, {
 		message: "يجب تحديد النوع.",
 	}),
+	showPhone: z.boolean(),
+});
+
+const GeolocationFormSchema = z.object({
 	gouvernorat: z.string().min(2, {
 		message: "يجب تحديد الولاية.",
 	}),
@@ -177,8 +188,7 @@ const SecondFormSchema = z.object({
 	}),
 	localite: z.string().min(2, {
 		message: "يجب تحديد المدينة.",
-	}),
-	showPhone: z.boolean(),
+	})
 });
 
 type LocationType = {
@@ -200,11 +210,7 @@ const categoriesFetcher = (url: string) => fetch(url).then(r => r.json()).then((
 
 function SecondStepForm({data, setFormData}: StepType) {
 	const { nextStep } = useStepper();
-	const location = useSWR('/location.json', locationFetcher);
 	const categories = useSWR('/api/categories', categoriesFetcher);
-	const gouvernorats = useMemo(() => {
-		return Object.keys(location.data || {})
-	}, [location.data]);
 	
 	const form = useForm<z.infer<typeof SecondFormSchema>>({
 		resolver: zodResolver(SecondFormSchema),
@@ -283,7 +289,79 @@ function SecondStepForm({data, setFormData}: StepType) {
 
 				</div>
 
-				<div className="flex flex-row justify-start gap-10">
+				<FormField
+					control={form.control}
+					name="description"
+					render={({ field }) => (
+						<FormItem className="mx-2">
+							<FormLabel>الوصف</FormLabel>
+							<FormControl>
+								<Textarea
+									placeholder="أخبرنا قليلاً عن نفسك"
+									{...field}
+									/>
+							</FormControl>
+							<FormDescription>
+								اصف إعلانك هنا.
+							</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+
+				<FormField
+					control={form.control}
+					name="showPhone"
+					render={({ field }) => (
+						<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4" dir="rtl">
+							<FormControl className="ml-2">
+								<Checkbox
+								checked={field.value}
+								onCheckedChange={field.onChange}
+								/>
+							</FormControl>
+							<div className="space-y-1 leading-none">
+								<FormLabel>
+								عرض رقم الهاتف
+								</FormLabel>
+								<FormDescription>
+								يمكنك اختيار عرض رقم هاتفك في الإعلان أو عدم ذلك. يمكنك تغيير هذا الإعداد في وقت لاحق في صفحة{" "}
+								<Link href="/examples/forms">إعدادات الملف الشخصي</Link>.
+								</FormDescription>
+							</div>
+						</FormItem>
+					)}
+				/>
+
+				<StepperFormActions />
+			</form>
+		</Form>
+	);
+}
+
+function GeolocationStepForm({data, setFormData}: StepType) {
+	const { nextStep } = useStepper();
+	const location = useSWR('/location.json', locationFetcher);
+	const gouvernorats = useMemo(() => {
+		return Object.keys(location.data || {})
+	}, [location.data]);
+	
+	const form = useForm<z.infer<typeof GeolocationFormSchema>>({
+		resolver: zodResolver(GeolocationFormSchema),
+		defaultValues: {
+			...data,
+		},
+	});
+
+	function onSubmit(_data: z.infer<typeof GeolocationFormSchema>) {
+		setFormData({...data, ..._data});
+		nextStep();
+	}
+
+	return (
+		<Form {...form}>
+			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+				<div className="flex flex-nowrap justify-start gap-x-2">
 					<FormField
 							control={form.control}
 							name="gouvernorat"
@@ -367,51 +445,6 @@ function SecondStepForm({data, setFormData}: StepType) {
 						)}
 					/>
 				</div>
-
-				<FormField
-					control={form.control}
-					name="description"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>الوصف</FormLabel>
-							<FormControl>
-								<Textarea
-									placeholder="أخبرنا قليلاً عن نفسك"
-									{...field}
-									/>
-							</FormControl>
-							<FormDescription>
-								اصف إعلانك هنا.
-							</FormDescription>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
-				<FormField
-					control={form.control}
-					name="showPhone"
-					render={({ field }) => (
-						<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4" dir="rtl">
-							<FormControl className="ml-2">
-								<Checkbox
-								checked={field.value}
-								onCheckedChange={field.onChange}
-								/>
-							</FormControl>
-							<div className="space-y-1 leading-none">
-								<FormLabel>
-								عرض رقم الهاتف
-								</FormLabel>
-								<FormDescription>
-								يمكنك اختيار عرض رقم هاتفك في الإعلان أو عدم ذلك. يمكنك تغيير هذا الإعداد في وقت لاحق في صفحة{" "}
-								<Link href="/examples/forms">إعدادات الملف الشخصي</Link>.
-								</FormDescription>
-							</div>
-						</FormItem>
-					)}
-				/>
-
 				<StepperFormActions />
 			</form>
 		</Form>
