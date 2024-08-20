@@ -51,7 +51,7 @@ export default async function Page({ params }: Props) {
       </div>
 
       <div className="w-full flex flex-row gap-x-2">
-        <div className="basis-1/3 h-full">
+        <div className="hidden md:block basis-1/3 h-full">
           <div className="flex flex-row justify-between mt-2">
             <div>
               <h2 className="font-bold text-xl">{data.title}</h2>
@@ -74,7 +74,7 @@ export default async function Page({ params }: Props) {
             </p>
           </div>
         </div>
-        <div className="basis-2/3 w-full h-full flex flex-col gap-2">
+        <div className="lg:basis-2/3 w-full h-full flex flex-col gap-2 px-2">
           <div className="flex flex-col justify-center items-start gap-4 rounded-xl border border-b-4 border-slate-300 w-full min-h-20 p-2">
 
             <div className="flex flex-row gap-2 justify-center items-center">

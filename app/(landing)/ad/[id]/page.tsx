@@ -60,25 +60,25 @@ export default async function Page({ params }: Props) {
 
       <div className="w-full flex flex-col-reverse gap-4 md:flex-row">
         <div className="md:basis-1/3 w-full">
-          <div className="flex flex-col justify-center items-center gap-4 rounded-xl border border-b-4 border-slate-300 w-full p-2">
+          <div className="flex flex-col gap-4 rounded-xl border border-b-4 border-slate-300 w-full p-2">
+            <h1 className="text-lg font-bold mb-4">صاحب المنشور</h1>
+            <div className="flex flex-row md:flex-col gap-4 justify-between items-center">
+              <div className="flex flex-row gap-2 justify-center items-center">
+                <Link href={`/profil/${ads.userId}`}>
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage src={ads.user.imageSrc!} />
+                    <AvatarFallback>{ads.user.userName?.at(0)}</AvatarFallback>
+                  </Avatar>
+                </Link>
 
-            <div className="flex flex-row gap-2 justify-center items-center">
-              <Link href={`/profil/${ads.userId}`}>
-                <Avatar className="w-8 h-8">
-                  <AvatarImage src={ads.user.imageSrc!} />
-                  <AvatarFallback>{ads.user.userName?.at(0)}</AvatarFallback>
-                </Avatar>
-              </Link>
+                <p className="text-xl font-semibold">{ads.user.fullName}</p>
+              </div>
 
-              <p className="text-xl font-semibold">{ads.user.fullName}</p>
+              {!user || user.userId != ads.userId ? <Link href={`/reply/${ads.adId}`}>
+                <Button variant="primary" className="w-full">أرسل رسالة نصية</Button>
+              </Link> : null
+              }
             </div>
-
-            {!user || user.userId != ads.userId ? <Link href={`/reply/${ads.adId}`}>
-              <Button variant="primary" className="w-full">رسالة</Button>
-            </Link> : null
-            }
-
-
           </div>
 
         </div>

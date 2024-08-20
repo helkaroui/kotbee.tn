@@ -22,7 +22,7 @@ export default async function Listings() {
                                 <div
                                     className="relative w-[200px] h-[200px] bg-cover bg-center rounded-lg snap-center "
                                     style={{
-                                        backgroundImage: `url('${ads.images ? ads.images[0] : ""}')`,
+                                        backgroundImage: `url('${ads.images && ads.images?.length != 0 ? ads.images[0] : "/img/placeholder-400x400.svg"}')`,
                                     }}
                                 >
                                     <Link href={`/profil/${ads.userId}`} className="absolute top-2 left-2 z-10">
