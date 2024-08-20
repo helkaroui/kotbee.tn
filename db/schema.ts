@@ -46,6 +46,7 @@ export const categories = pgTable("categories", {
     id: serial("id").primaryKey(),
     title: text("name").notNull(),
     icon: text("icon"),
+    subCategoryTitle: text("sub_category_title"),
     createdAt: timestamp("created_at").notNull().default(sql`now()`)
 });
 

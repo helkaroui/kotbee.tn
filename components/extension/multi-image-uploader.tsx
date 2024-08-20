@@ -52,9 +52,12 @@ export default function MultiImageUploader({ onChange }: MultiImageUploaderProps
             <div className="flex justify-center items-center rounded-xl border border-slate-500 border-dashed px-4 py-8 my-4 hover:cursor-pointer hover:bg-slate-100" {...getRootProps()}>
             <input {...getInputProps()} />
             {isDragActive ? (
-                <p>قم بإسقاط الملفات هنا ...</p>
+                <p>قم بإسقاط الصور هنا ...</p>
             ) : (
-                <p>قم بسحب وإسقاط الملفات هنا، أو انقر لتحديد الملفات</p>
+                <div className="flex-1 text-center">
+                <p>أضف بعض الصور المرافقة لإعلانك</p>
+                <p>(إختياري)</p>
+                </div>
             )}
             </div>
 

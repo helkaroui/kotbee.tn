@@ -27,7 +27,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import validator from "validator";
-
+import { getUserProfileType } from "@/db/queries";
+import useSWR from "swr";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -37,14 +38,17 @@ const formSchema = z.object({
   dob: z.string().date(),
 })
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json()).then((data) => data as getUserProfileType);
 export default function Page() {
+  const user = useSWR("/api/user/me", fetcher);
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "John Doe",
-      phone: "22 33 44 55",
-      dob: "",
+      username: user.data?.fullName || "empty",
+      phone: user.data?.primaryPhoneNumber || "",
+      dob: user.data?.dob || "",
     },
   });
 
@@ -54,6 +58,18 @@ export default function Page() {
     // ✅ This will be type-safe and validated.
     console.log(values)
   };
+
+  if (user.isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if(user.error) {
+    return <div>Something went wrong!</div>
+  }
+
+  if(user.data === undefined) {
+    return <div>Unauthorized</div>
+  }
 
   return (
     <div className="flex flex-col gap-y-4 mt-8 mb-4 w-[700px] mx-auto justify-start items-start">
@@ -97,7 +113,7 @@ export default function Page() {
                         <FormItem>
                           <FormLabel>اسم المستخدم</FormLabel>
                           <FormControl>
-                            <Input placeholder="جون دو" {...field} />
+                            <Input placeholder="" {...field} value={user.data?.fullName || ""} />
                           </FormControl>
                           <FormDescription>
                             هذا هو اسم العرض العام الخاص بك.
@@ -114,7 +130,7 @@ export default function Page() {
                         <FormItem>
                           <FormLabel>رقم الهاتف</FormLabel>
                           <FormControl>
-                            <Input placeholder="22 33 44 55" {...field} dir="ltr" className="text-center" />
+                            <Input placeholder="" {...field} dir="ltr" className="text-center" value={user.data?.primaryPhoneNumber || ""} />
                           </FormControl>
                           <FormDescription>
                             هذا هو رقم هاتفك المحمول.
@@ -131,7 +147,7 @@ export default function Page() {
                         <FormItem>
                           <FormLabel>تاريخ الميلاد</FormLabel>
                           <FormControl>
-                            <Input placeholder="22/04/1994" {...field} type="date" />
+                            <Input placeholder="22/04/1994" {...field} type="date"  value={user.data?.dob || ""} />
                           </FormControl>
                           <FormDescription>
                             هذا هو تاريخ ميلادك.

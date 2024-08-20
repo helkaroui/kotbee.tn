@@ -41,6 +41,7 @@ type FormData = {
 	categoryId: number;
 	subcategory: string;
 	subcategoryId: number;
+	subcategoryLabel: string | null;
 	subcategories: subCategoryType[];
 	gouvernorat: string;
 	delegation: string;
@@ -59,6 +60,7 @@ export default function StepperForm() {
 		categoryId: 0,
 		subcategory: "",
 		subcategoryId: 0,
+		subcategoryLabel: null,
 		subcategories: [],
 		gouvernorat: "",
 		delegation: "",
@@ -227,67 +229,67 @@ function SecondStepForm({ data, setFormData }: StepType) {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-				<div className="flex flex-row justify-start gap-10">
-					<FormField
-						control={form.control}
-						name="category"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>الفئة</FormLabel>
-								<Select defaultValue={field.value} onValueChange={(v) => {
-									const t = categories.data?.find((c) => c.title === v)?.subCategories || [];
-									const categoryId = categories.data?.find((c) => c.title === v)?.id || 0;
-									setFormData({ ...data, categoryId, subcategories: t });
-									field.onChange(v)
-								}} dir="rtl">
-									<FormControl>
-										<SelectTrigger className="min-w-[150px]">
-											<SelectValue placeholder="" />
-										</SelectTrigger>
-									</FormControl>
-									<SelectContent>
-										{
-											categories.data?.map((c) => (
-												<SelectItem key={c.id} value={c.title}>{c.title}</SelectItem>
-											))
-										}
-									</SelectContent>
-								</Select>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+				<FormField
+					control={form.control}
+					name="category"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>الفئة</FormLabel>
+							<Select defaultValue={field.value} onValueChange={(v) => {
+								const t = categories.data?.find((c) => c.title === v)?.subCategories || [];
+								const category = categories.data?.find((c) => c.title === v)
+								const categoryId = category?.id || 0;
+								const subcategoryLabel = category?.subCategoryTitle || null;
+								setFormData({ ...data, categoryId, subcategories: t, subcategoryLabel });
+								field.onChange(v)
+							}} dir="rtl">
+								<FormControl>
+									<SelectTrigger className="min-w-[150px]">
+										<SelectValue placeholder="" />
+									</SelectTrigger>
+								</FormControl>
+								<SelectContent>
+									{
+										categories.data?.map((c) => (
+											<SelectItem key={c.id} value={c.title}>{c.title}</SelectItem>
+										))
+									}
+								</SelectContent>
+							</Select>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
 
-					<FormField
-						control={form.control}
-						name="subcategory"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>النوع</FormLabel>
-								<Select defaultValue={field.value} onValueChange={(val) => {
-									const subcategoryId = data.subcategories.find((c) => c.title === val)?.id || 0;
-									setFormData({ ...data, subcategoryId });
-									field.onChange(val);
-								}} dir="rtl" disabled={form.control._formValues["category"] === ""}>
-									<FormControl>
-										<SelectTrigger className="min-w-[150px]">
-											<SelectValue placeholder="" />
-										</SelectTrigger>
-									</FormControl>
-									<SelectContent>
-										{
-											data.subcategories.map((c) => (
-												<SelectItem key={c.title} value={c.title}>{c.title}</SelectItem>
-											))
-										}
-									</SelectContent>
-								</Select>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+				{ form.control._formValues["category"] != "" && data.subcategoryLabel && <FormField
+					control={form.control}
+					name="subcategory"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>{data.subcategoryLabel}</FormLabel>
+							<Select defaultValue={field.value} onValueChange={(val) => {
+								const subcategoryId = data.subcategories.find((c) => c.title === val)?.id || 0;
+								setFormData({ ...data, subcategoryId });
+								field.onChange(val);
+							}} dir="rtl" disabled={form.control._formValues["category"] === ""}>
+								<FormControl>
+									<SelectTrigger className="min-w-[150px]">
+										<SelectValue placeholder="" />
+									</SelectTrigger>
+								</FormControl>
+								<SelectContent>
+									{
+										data.subcategories.map((c) => (
+											<SelectItem key={c.title} value={c.title}>{c.title}</SelectItem>
+										))
+									}
+								</SelectContent>
+							</Select>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>}
 
-				</div>
 
 				<FormField
 					control={form.control}
@@ -297,7 +299,7 @@ function SecondStepForm({ data, setFormData }: StepType) {
 							<FormLabel>الوصف</FormLabel>
 							<FormControl>
 								<Textarea
-									placeholder="أخبرنا قليلاً عن نفسك"
+									placeholder=""
 									{...field}
 								/>
 							</FormControl>
@@ -389,7 +391,7 @@ function GeolocationStepForm({ data, setFormData }: StepType) {
 					)}
 				/>
 
-				<FormField
+				{form.control._formValues["gouvernorat"] != "" && <FormField
 					control={form.control}
 					name="delegation"
 					render={({ field }) => (
@@ -417,9 +419,9 @@ function GeolocationStepForm({ data, setFormData }: StepType) {
 							<FormMessage />
 						</FormItem>
 					)}
-				/>
+				/>}
 
-				<FormField
+				{form.control._formValues["gouvernorat"] != "" && form.control._formValues["delegation"] != "" && <FormField
 					control={form.control}
 					name="localite"
 					render={({ field }) => (
@@ -442,7 +444,7 @@ function GeolocationStepForm({ data, setFormData }: StepType) {
 							<FormMessage />
 						</FormItem>
 					)}
-				/>
+				/>}
 				<StepperFormActions />
 			</form>
 		</Form>

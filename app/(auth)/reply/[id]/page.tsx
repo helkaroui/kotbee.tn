@@ -31,7 +31,7 @@ export default async function Page({ params }: Props) {
   moment.locale("ar-tn");
 
   return (
-    <div className="flex flex-col gap-y-4 mt-8 mb-4 w-[700px] mx-auto justify-start items-start">
+    <div className="flex flex-col gap-y-4 mt-8 mb-4 w-full md:w-[700px] mx-auto justify-start items-start">
       <div className="w-full">
         <Breadcrumb>
           <BreadcrumbList>

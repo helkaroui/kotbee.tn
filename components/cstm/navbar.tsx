@@ -99,10 +99,6 @@ export async function MobileNavbar() {
 
                             <Separator className="my-2" />
 
-                            <div className="flex flex-row my-2 justify-center items-center">
-                                <SearchInput />
-                            </div>
-
                             <div className="flex flex-wrap gap-2 justify-center items-center">
                                 {
                                     categories.map((category) => (
@@ -112,7 +108,6 @@ export async function MobileNavbar() {
                                     ))
                                 }
                             </div>
-
 
                             <Separator className="my-2" />
 

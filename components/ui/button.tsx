@@ -81,13 +81,13 @@ const buttonVariants = cva(
           'bg-destructive/15 text-destructive border-2 border-b-4 border-destructive/80 hover:bg-destructive/20',
 
         whiteComic:
-          'bg-white text-black hover:bg-gray-200/90 border-gray-800 border-2 border-b-8 active:border-b-2 rounded-md',
+          'bg-white text-black hover:bg-gray-200/90 border-gray-800 border-2 border-b-4 active:border-b-2 rounded-md',
 
         orangeComic:
-          'bg-white text-orange-500 hover:bg-gray-200/90 border-orange-500 border-2 border-b-8 active:border-b-2 rounded-md',
+          'bg-white text-orange-500 hover:bg-gray-200/90 border-orange-500 border-2 border-b-4 active:border-b-2 rounded-md',
 
         filledYellowComic:
-          'bg-[#ffd43b] text-black hover:bg-gray-200/90 border-gray-800 border-2 border-b-8 active:border-b-2 rounded-md',
+          'bg-[#ffd43b] text-black hover:bg-gray-200/90 border-gray-800 border-2 border-b-4 active:border-b-2 rounded-md',
 
         comicLightWhite:
           'bg-slate-100 text-gray-600 hover:bg-gray-200/90 border-gray-400 border border-b-4 active:border-b-2 rounded-lg',  

@@ -60,8 +60,9 @@ export const getAdById = async (adId: number) => {
 
 export const getUserProfile = async () => {
     const { userId } = await auth();
+
     if(!userId) {
-        return null;
+        return undefined;
     }
 
     return db.query.users.findFirst({
@@ -73,6 +74,8 @@ export const getUserProfile = async () => {
         }
     });
 };
+
+export type getUserProfileType = Awaited<ReturnType<typeof getUserProfile>>;
 
 export const getUserById = async (userId: string) => {
     return db.query.users.findFirst({
@@ -139,7 +142,7 @@ export type getRepliesType = Exclude<Awaited<ReturnType<typeof getReplies>>, nul
 
 export const getCategories = async () => {
     return db.query.categories.findMany({
-        orderBy: (categories, {asc}) => [asc(categories.title)],
+        orderBy: (categories, {asc}) => [asc(categories.id)],
         with: {
             subCategories: true
         }
@@ -148,7 +151,7 @@ export const getCategories = async () => {
 
 export const getSubCategories = async () => {
     return db.query.subCategories.findMany({
-        orderBy: (subcategories, {asc}) => [asc(subcategories.title)]
+        orderBy: (subcategories, {asc}) => [asc(subcategories.id)],
     });
 };
 
