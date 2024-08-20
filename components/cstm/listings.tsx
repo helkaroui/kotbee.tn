@@ -15,7 +15,7 @@ export default async function Listings() {
                             عرض الكل
                         </Link>
                     </div>
-                    <div className="w-full flex overflow-x-auto scroll-smooth scroll-mx-4 snap-x">
+                    <div className="w-full flex overflow-x-auto scroll-mx-4">
                         {recentAds.map((ads, index) => (
                             <div key={index} className="p-1">
                                 {/* TODO add placeholder */}

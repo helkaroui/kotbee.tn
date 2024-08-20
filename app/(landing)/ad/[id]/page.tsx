@@ -18,7 +18,7 @@ import { auth } from "@clerk/nextjs/server";
 
 type Props = {
   params: {
-      id: number;
+    id: number;
   };
 };
 
@@ -26,7 +26,7 @@ export default async function Page({ params }: Props) {
   const user = await auth();
   const ads = await getAdById(params.id);
 
-  if(!ads) {
+  if (!ads) {
     return <div>Ad not found</div>;
   }
 
@@ -58,15 +58,15 @@ export default async function Page({ params }: Props) {
         </Breadcrumb>
       </div>
 
-      <div className="w-full flex flex-row">
-        <div className="hidden md:basis-1/3 w-full">
+      <div className="w-full flex flex-col-reverse gap-4 md:flex-row">
+        <div className="md:basis-1/3 w-full">
           <div className="flex flex-col justify-center items-center gap-4 rounded-xl border border-b-4 border-slate-300 w-full p-2">
 
             <div className="flex flex-row gap-2 justify-center items-center">
               <Link href={`/profil/${ads.userId}`}>
                 <Avatar className="w-8 h-8">
-                    <AvatarImage src={ads.user.imageSrc!} />
-                    <AvatarFallback>{ads.user.userName?.at(0)}</AvatarFallback>
+                  <AvatarImage src={ads.user.imageSrc!} />
+                  <AvatarFallback>{ads.user.userName?.at(0)}</AvatarFallback>
                 </Avatar>
               </Link>
 
@@ -80,30 +80,30 @@ export default async function Page({ params }: Props) {
 
 
           </div>
-        
+
         </div>
         <div className="flex flex-col md:basis-2/3 w-full px-2">
           <ImageCarousel images={ads.images} />
           <div className="flex flex-row justify-between mt-2">
-              <h2 className="font-bold text-xl">{ads.title}</h2>
-              <p className="text-sm font-thin">
-                <Time d={ads.createdAt} />
-              </p>
+            <h2 className="font-bold text-xl">{ads.title}</h2>
+            <p className="text-sm font-thin">
+              <Time d={ads.createdAt} />
+            </p>
           </div>
-        <Separator />
-        <div className="my-4">
-          <p className="text-md font-light">
-            {ads.description}
-          </p>
-        </div>
+          <Separator />
+          <div className="my-4">
+            <p className="text-md font-light">
+              {ads.description}
+            </p>
+          </div>
 
-        <Separator />
-        <div className="my-4">
-          <p className="text-xl font-bold mb-2">الموقع:</p>
-          <p className="text-md font-light">
-            {ads.gouvernorat}، {ads.delegation}، {ads.localite}
-          </p>
-        </div>
+          <Separator />
+          <div className="my-4">
+            <p className="text-xl font-bold mb-2">الموقع:</p>
+            <p className="text-md font-light">
+              {ads.gouvernorat}، {ads.delegation}، {ads.localite}
+            </p>
+          </div>
 
         </div>
       </div>

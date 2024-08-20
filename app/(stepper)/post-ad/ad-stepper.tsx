@@ -28,10 +28,10 @@ import { getCategoriesType } from "@/db/queries";
 import MultiImageUploader from "@/components/extension/multi-image-uploader";
 
 const steps = [
-    { label: "عنوان الإعلان", description: "اختر عنوانًا لإعلانك" },
-    { label: "وصف الإعلان", description: "اختر وصفًا" },
-    { label: "عنوان السكن", description: "حدد عنوانك" },
-    { label: "إضافة صور", description: "إضافة صورة (اختياري)" },
+	{ label: "عنوان الإعلان", description: "اختر عنوانًا لإعلانك" },
+	{ label: "وصف الإعلان", description: "اختر وصفًا" },
+	{ label: "عنوان السكن", description: "حدد عنوانك" },
+	{ label: "إضافة صور", description: "إضافة صورة (اختياري)" },
 ];
 
 type FormData = {
@@ -87,13 +87,13 @@ export default function StepperForm() {
 							</Step>
 						);
 					}
-                    if (index === 1) {
-                        return (
-                            <Step key={stepProps.label} {...stepProps}>
-                                <SecondStepForm data={data} setFormData={setFormData} />
-                            </Step>
-                        )
-                    }
+					if (index === 1) {
+						return (
+							<Step key={stepProps.label} {...stepProps}>
+								<SecondStepForm data={data} setFormData={setFormData} />
+							</Step>
+						)
+					}
 					if (index === 2) {
 						return (
 							<Step key={stepProps.label} {...stepProps}>
@@ -101,13 +101,13 @@ export default function StepperForm() {
 							</Step>
 						)
 					}
-                    if (index === 3) {
-                        return (
-                            <Step key={stepProps.label} {...stepProps}>
-                                <ThirdStepForm data={data} setFormData={setFormData} />
-                            </Step>
-                        )
-                    }
+					if (index === 3) {
+						return (
+							<Step key={stepProps.label} {...stepProps}>
+								<ThirdStepForm data={data} setFormData={setFormData} />
+							</Step>
+						)
+					}
 				})}
 				<MyStepperFooter data={data} />
 			</Stepper>
@@ -116,17 +116,17 @@ export default function StepperForm() {
 }
 
 const FirstFormSchema = z.object({
-    title: z.string().min(5, {
-        message: "يجب أن يكون العنوان على الأقل 5 أحرف.",
-    }),
+	title: z.string().min(3, {
+		message: "يجب أن يكون العنوان على الأقل 3 أحرف.",
+	}),
 });
 
 type StepType = {
-	data: FormData, 
+	data: FormData,
 	setFormData: (data: FormData) => void
 }
 
-function FirstStepForm({data, setFormData}: StepType) {
+function FirstStepForm({ data, setFormData }: StepType) {
 	const { nextStep } = useStepper();
 
 	const form = useForm<z.infer<typeof FirstFormSchema>>({
@@ -137,33 +137,33 @@ function FirstStepForm({data, setFormData}: StepType) {
 	});
 
 	function onSubmit(_data: z.infer<typeof FirstFormSchema>) {
-		setFormData({...data, title: _data.title});
+		setFormData({ ...data, title: _data.title });
 		nextStep();
 	}
 
-    return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                        <FormItem className="mx-2">
-                            <FormLabel>ما هو عنوان إعلانك؟</FormLabel>
-                            <FormControl>
-                                <Input placeholder="اكتب عنوانًا مختصرًا هنا" {...field} dir="rtl" />
-                            </FormControl>
-                            <FormDescription>
-                                هذا هو عنوان إعلانك.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <StepperFormActions />
-            </form>
-        </Form>
-    );
+	return (
+		<Form {...form}>
+			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+				<FormField
+					control={form.control}
+					name="title"
+					render={({ field }) => (
+						<FormItem className="mx-2">
+							<FormLabel>ما هو عنوان إعلانك؟</FormLabel>
+							<FormControl>
+								<Input placeholder="اكتب عنوانًا مختصرًا هنا" {...field} dir="rtl" />
+							</FormControl>
+							<FormDescription>
+								هذا هو عنوان إعلانك.
+							</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<StepperFormActions />
+			</form>
+		</Form>
+	);
 }
 
 const SecondFormSchema = z.object({
@@ -208,10 +208,10 @@ type subCategoryType = {
 const locationFetcher = (url: string) => fetch(url).then(r => r.json()).then((data) => data as LocationType)
 const categoriesFetcher = (url: string) => fetch(url).then(r => r.json()).then((data) => data as getCategoriesType)
 
-function SecondStepForm({data, setFormData}: StepType) {
+function SecondStepForm({ data, setFormData }: StepType) {
 	const { nextStep } = useStepper();
 	const categories = useSWR('/api/categories', categoriesFetcher);
-	
+
 	const form = useForm<z.infer<typeof SecondFormSchema>>({
 		resolver: zodResolver(SecondFormSchema),
 		defaultValues: {
@@ -220,7 +220,7 @@ function SecondStepForm({data, setFormData}: StepType) {
 	});
 
 	function onSubmit(_data: z.infer<typeof SecondFormSchema>) {
-		setFormData({...data, ..._data});
+		setFormData({ ...data, ..._data });
 		nextStep();
 	}
 
@@ -234,16 +234,16 @@ function SecondStepForm({data, setFormData}: StepType) {
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>الفئة</FormLabel>
-								<Select defaultValue={field.value} onValueChange={(v)=> {
+								<Select defaultValue={field.value} onValueChange={(v) => {
 									const t = categories.data?.find((c) => c.title === v)?.subCategories || [];
 									const categoryId = categories.data?.find((c) => c.title === v)?.id || 0;
-									setFormData({...data, categoryId, subcategories: t});
+									setFormData({ ...data, categoryId, subcategories: t });
 									field.onChange(v)
 								}} dir="rtl">
 									<FormControl>
-									<SelectTrigger className="min-w-[150px]">
-										<SelectValue placeholder="" />
-									</SelectTrigger>
+										<SelectTrigger className="min-w-[150px]">
+											<SelectValue placeholder="" />
+										</SelectTrigger>
 									</FormControl>
 									<SelectContent>
 										{
@@ -266,13 +266,13 @@ function SecondStepForm({data, setFormData}: StepType) {
 								<FormLabel>النوع</FormLabel>
 								<Select defaultValue={field.value} onValueChange={(val) => {
 									const subcategoryId = data.subcategories.find((c) => c.title === val)?.id || 0;
-									setFormData({...data, subcategoryId});
+									setFormData({ ...data, subcategoryId });
 									field.onChange(val);
-									}} dir="rtl" disabled={form.control._formValues["category"] === ""}>
+								}} dir="rtl" disabled={form.control._formValues["category"] === ""}>
 									<FormControl>
-									<SelectTrigger className="min-w-[150px]">
-										<SelectValue placeholder="" />
-									</SelectTrigger>
+										<SelectTrigger className="min-w-[150px]">
+											<SelectValue placeholder="" />
+										</SelectTrigger>
 									</FormControl>
 									<SelectContent>
 										{
@@ -299,7 +299,7 @@ function SecondStepForm({data, setFormData}: StepType) {
 								<Textarea
 									placeholder="أخبرنا قليلاً عن نفسك"
 									{...field}
-									/>
+								/>
 							</FormControl>
 							<FormDescription>
 								اصف إعلانك هنا.
@@ -316,17 +316,17 @@ function SecondStepForm({data, setFormData}: StepType) {
 						<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4" dir="rtl">
 							<FormControl className="ml-2">
 								<Checkbox
-								checked={field.value}
-								onCheckedChange={field.onChange}
+									checked={field.value}
+									onCheckedChange={field.onChange}
 								/>
 							</FormControl>
 							<div className="space-y-1 leading-none">
 								<FormLabel>
-								عرض رقم الهاتف
+									عرض رقم الهاتف
 								</FormLabel>
 								<FormDescription>
-								يمكنك اختيار عرض رقم هاتفك في الإعلان أو عدم ذلك. يمكنك تغيير هذا الإعداد في وقت لاحق في صفحة{" "}
-								<Link href="/examples/forms">إعدادات الملف الشخصي</Link>.
+									يمكنك اختيار عرض رقم هاتفك في الإعلان أو عدم ذلك. يمكنك تغيير هذا الإعداد في وقت لاحق في صفحة{" "}
+									<Link href="/examples/forms">إعدادات الملف الشخصي</Link>.
 								</FormDescription>
 							</div>
 						</FormItem>
@@ -339,13 +339,13 @@ function SecondStepForm({data, setFormData}: StepType) {
 	);
 }
 
-function GeolocationStepForm({data, setFormData}: StepType) {
+function GeolocationStepForm({ data, setFormData }: StepType) {
 	const { nextStep } = useStepper();
 	const location = useSWR('/location.json', locationFetcher);
 	const gouvernorats = useMemo(() => {
 		return Object.keys(location.data || {})
 	}, [location.data]);
-	
+
 	const form = useForm<z.infer<typeof GeolocationFormSchema>>({
 		resolver: zodResolver(GeolocationFormSchema),
 		defaultValues: {
@@ -354,97 +354,95 @@ function GeolocationStepForm({data, setFormData}: StepType) {
 	});
 
 	function onSubmit(_data: z.infer<typeof GeolocationFormSchema>) {
-		setFormData({...data, ..._data});
+		setFormData({ ...data, ..._data });
 		nextStep();
 	}
 
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-				<div className="flex flex-nowrap justify-start gap-x-2">
-					<FormField
-							control={form.control}
-							name="gouvernorat"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>الولاية</FormLabel>
-									<Select defaultValue={field.value} onValueChange={(v) => {
-										location.data && setFormData({...data, delegations: location.data[v].map((d) => d.delegation).filter((v, i, a) => a.indexOf(v) === i), localites: []});
-										field.onChange(v);
-									}} dir="rtl">
-										<FormControl>
-										<SelectTrigger className="min-w-[150px]">
-											<SelectValue placeholder="" />
-										</SelectTrigger>
-										</FormControl>
-										<SelectContent>
-											{
-												gouvernorats.map((g) => (
-													<SelectItem key={g} value={g}>{g}</SelectItem>
-												))
-											}
-										</SelectContent>
-									</Select>
-									<FormMessage />
-								</FormItem>
-							)}
-					/>
-
-					<FormField
-						control={form.control}
-						name="delegation"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>المعتمدية</FormLabel>
-								<Select defaultValue={field.value} onValueChange={(v) => {
-									const gov = form.control._formValues["gouvernorat"] as string;
-									const t = location.data && location.data[gov].filter((d) => d.delegation === v).map((d) => d.localite) || [];
-									setFormData({...data, localites: t});
-									field.onChange(v);
-								}} dir="rtl" disabled={form.control._formValues["gouvernorat"] === ""}>
-									<FormControl>
-									<SelectTrigger className="min-w-[100px]">
+				<FormField
+					control={form.control}
+					name="gouvernorat"
+					render={({ field }) => (
+						<FormItem className="mx-2">
+							<FormLabel>الولاية</FormLabel>
+							<Select defaultValue={field.value} onValueChange={(v) => {
+								location.data && setFormData({ ...data, delegations: location.data[v].map((d) => d.delegation).filter((v, i, a) => a.indexOf(v) === i), localites: [] });
+								field.onChange(v);
+							}} dir="rtl">
+								<FormControl>
+									<SelectTrigger>
 										<SelectValue placeholder="" />
 									</SelectTrigger>
-									</FormControl>
-									<SelectContent>
-										{
-											data.delegations.map((g) => (
-												<SelectItem key={g} value={g}>{g}</SelectItem>
-											))
-										}
-									</SelectContent>
-								</Select>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+								</FormControl>
+								<SelectContent>
+									{
+										gouvernorats.map((g) => (
+											<SelectItem key={g} value={g}>{g}</SelectItem>
+										))
+									}
+								</SelectContent>
+							</Select>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
 
-					<FormField
-						control={form.control}
-						name="localite"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>المدينة</FormLabel>
-								<Select defaultValue={field.value} onValueChange={field.onChange} dir="rtl"  disabled={form.control._formValues["gouvernorat"] === "" || form.control._formValues["delegation"] === ""}>
-									<FormControl>
-									<SelectTrigger className="min-w-[100px]">
+				<FormField
+					control={form.control}
+					name="delegation"
+					render={({ field }) => (
+						<FormItem className="mx-2">
+							<FormLabel>المعتمدية</FormLabel>
+							<Select defaultValue={field.value} onValueChange={(v) => {
+								const gov = form.control._formValues["gouvernorat"] as string;
+								const t = location.data && location.data[gov].filter((d) => d.delegation === v).map((d) => d.localite) || [];
+								setFormData({ ...data, localites: t });
+								field.onChange(v);
+							}} dir="rtl" disabled={form.control._formValues["gouvernorat"] === ""}>
+								<FormControl>
+									<SelectTrigger>
 										<SelectValue placeholder="" />
 									</SelectTrigger>
-									</FormControl>
-									<SelectContent>
-										{
-											data.localites.map((g) => (
-												<SelectItem key={g} value={g}>{g}</SelectItem>
-											))
-										}
-									</SelectContent>
-								</Select>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-				</div>
+								</FormControl>
+								<SelectContent>
+									{
+										data.delegations.map((g) => (
+											<SelectItem key={g} value={g}>{g}</SelectItem>
+										))
+									}
+								</SelectContent>
+							</Select>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+
+				<FormField
+					control={form.control}
+					name="localite"
+					render={({ field }) => (
+						<FormItem className="mx-2">
+							<FormLabel>المدينة</FormLabel>
+							<Select defaultValue={field.value} onValueChange={field.onChange} dir="rtl" disabled={form.control._formValues["gouvernorat"] === "" || form.control._formValues["delegation"] === ""}>
+								<FormControl>
+									<SelectTrigger>
+										<SelectValue placeholder="" />
+									</SelectTrigger>
+								</FormControl>
+								<SelectContent>
+									{
+										data.localites.map((g) => (
+											<SelectItem key={g} value={g}>{g}</SelectItem>
+										))
+									}
+								</SelectContent>
+							</Select>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
 				<StepperFormActions />
 			</form>
 		</Form>
@@ -452,10 +450,10 @@ function GeolocationStepForm({data, setFormData}: StepType) {
 }
 
 const ThirdFormSchema = z.object({
-    images: z.string()
+	images: z.string()
 });
 
-function ThirdStepForm({data, setFormData}: StepType) {
+function ThirdStepForm({ data, setFormData }: StepType) {
 	const { nextStep } = useStepper();
 
 	const form = useForm<z.infer<typeof ThirdFormSchema>>({
@@ -469,18 +467,18 @@ function ThirdStepForm({data, setFormData}: StepType) {
 		nextStep();
 	}
 
-    return (
+	return (
 		<Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 				<div className="flex w-full bg-slate-200 rounded-xl p-4 justify-center items-center">
 					<MultiImageUploader onChange={(images) => {
-						setFormData({...data, images});
+						setFormData({ ...data, images });
 					}} />
 				</div>
-                <StepperFormActions />
-            </form>
-        </Form>
-    );
+				<StepperFormActions />
+			</form>
+		</Form>
+	);
 }
 
 function StepperFormActions() {
@@ -542,15 +540,15 @@ function MyStepperFooter({ data }: { data: FormData }) {
 		setUploadStatus("جاري نشر الإعلان...");
 
 		fetch('/api/post-ad', {
-            method: 'POST',
-            body: form
-        }).then((res) => {
-			if(!res.ok){
+			method: 'POST',
+			body: form
+		}).then((res) => {
+			if (!res.ok) {
 				setUploadStatus("حدث خطأ أثناء نشر الإعلان!");
-				toast({title: "حدث خطأ أثناء نشر الإعلان!", variant: "destructive"});
+				toast({ title: "حدث خطأ أثناء نشر الإعلان!", variant: "destructive" });
 			} else {
 				setUploadStatus("تم نشر الإعلان بنجاح!");
-				toast({title: "تم نشر الإعلان بنجاح!", variant: "success"});
+				toast({ title: "تم نشر الإعلان بنجاح!", variant: "success" });
 				res.json().then((data) => {
 					setTimeout(() => {
 						window.location.href = `/ad/${data.adId}`;
