@@ -7,6 +7,7 @@ import Footer from "@/components/cstm/sections/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { arSA } from "@clerk/localizations";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CSPostHogProvider } from "./providers";
 
 
 const fontSans = Inter({
@@ -28,14 +29,16 @@ export default function RootLayout({
     <ClerkProvider localization={arSA}>
     <TooltipProvider>
     <html lang="en">
-      <body className={cn(
-        "bg-background font-sans antialiased",
-        fontSans.variable
-        )}
-        dir="rtl"
-        >
-          {children}
-        </body>
+      <CSPostHogProvider>
+        <body className={cn(
+          "bg-background font-sans antialiased",
+          fontSans.variable
+          )}
+          dir="rtl"
+          >
+            {children}
+          </body>
+        </CSPostHogProvider>
     </html>
     </TooltipProvider>
     </ClerkProvider>
